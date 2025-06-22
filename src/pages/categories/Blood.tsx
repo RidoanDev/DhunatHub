@@ -25,7 +25,7 @@ const Blood = () => {
       phone: "01567-891234",
       address: "কেন্দ্রীয় বাজার",
       subcategory: "AB+"
-    }
+    },
         {
       id: 1,
       name: "মোহাম্মদ রাসেল",
