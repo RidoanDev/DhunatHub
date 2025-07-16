@@ -1,0 +1,43 @@
+
+<!doctype html>
+<html lang="bn">
+  <head>
+    <meta name="google-site-verification" content="A0IVSpMPJp31gNQG5Y2TinipS6zarnk0EssxWAPG5So" />
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/prRszN0b/Dhunat-Hub-20250615-173308-0000.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DhunatHub - ধুনট হাব</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#2563eb" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="DhunatHub" />
+    <link rel="apple-touch-icon" href="https://i.postimg.cc/prRszN0b/Dhunat-Hub-20250615-173308-0000.png" />
+    
+    <!-- Description -->
+    <meta name="description" content="ধুনট এলাকার সকল সেবা এক জায়গায় - ডাক্তার, হাসপাতাল, রক্তদান, গাড়ি ভাড়া এবং আরো অনেক কিছু" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/sw.js')
+            .then(function(registration) {
+              console.log('SW registered: ', registration);
+            })
+            .catch(function(registrationError) {
+              console.log('SW registration failed: ', registrationError);
+            });
+        });
+      }
+    </script>
+  </body>
+</html>

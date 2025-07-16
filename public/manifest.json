@@ -1,0 +1,27 @@
+
+{
+  "name": "DhunatHub - ধুনট হাব",
+  "short_name": "DhunatHub",
+  "description": "ধুনট এলাকার সকল সেবা এক জায়গায়",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "https://i.postimg.cc/prRszN0b/Dhunat-Hub-20250615-173308-0000.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://i.postimg.cc/prRszN0b/Dhunat-Hub-20250615-173308-0000.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "productivity", "social"],
+  "lang": "bn"
+}
