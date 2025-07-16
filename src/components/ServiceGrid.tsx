@@ -44,6 +44,19 @@ const ServiceGrid = () => {
   ];
 
   const handleServiceClick = (serviceId: string) => {
+    // Handle external URLs
+    if (serviceId === 'buy-sell') {
+      window.open('https://netlistore.netlify.app', '_blank');
+      return;
+    }
+    
+    if (serviceId === 'website') {
+      window.open('https://ridoan-zisan.netlify.app', '_blank');
+      return;
+    }
+
+    // Scroll to top before navigation
+    window.scrollTo(0, 0);
     navigate(`/category/${serviceId}`);
   };
 

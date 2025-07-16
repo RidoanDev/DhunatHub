@@ -21,7 +21,7 @@ const SearchAndFilter: React.FC<SearchAndFilterProps> = ({
   filterOptions = []
 }) => {
   return (
-    <div className="px-4 py-3 bg-white border-b border-gray-100">
+    <div className="sticky top-14 z-30 px-4 py-3 bg-white border-b border-gray-100 shadow-sm">
       <div className="flex gap-2">
         {/* Search Input */}
         <div className="flex-1 relative">
@@ -30,7 +30,7 @@ const SearchAndFilter: React.FC<SearchAndFilterProps> = ({
             type="text"
             placeholder={placeholder}
             onChange={(e) => onSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 font-bengali"
+            className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent font-bengali"
           />
         </div>
 
@@ -40,7 +40,7 @@ const SearchAndFilter: React.FC<SearchAndFilterProps> = ({
             <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 z-10" size={16} />
             <select
               onChange={(e) => onFilter(e.target.value)}
-              className="pl-10 pr-8 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 font-bengali bg-white appearance-none min-w-[120px]"
+              className="pl-10 pr-8 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent font-bengali bg-white appearance-none min-w-[120px]"
             >
               <option value="all">সকল</option>
               {filterOptions.map((option) => (
@@ -53,20 +53,20 @@ const SearchAndFilter: React.FC<SearchAndFilterProps> = ({
         )}
       </div>
 
-      {/* Quick Filter Buttons for specific categories */}
+      {/* Quick Filter Buttons */}
       {filterOptions.length > 0 && (
         <div className="flex flex-wrap gap-2 mt-3">
           <button
             onClick={() => onFilter('all')}
-            className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-bengali hover:bg-gray-200 transition-colors"
+            className="px-3 py-1.5 bg-gray-100 text-gray-700 rounded-full text-xs font-bengali hover:bg-gray-200 transition-colors active:scale-95"
           >
             সকল
           </button>
-          {filterOptions.slice(0, 6).map((option) => (
+          {filterOptions.slice(0, 5).map((option) => (
             <button
               key={option.value}
               onClick={() => onFilter(option.value)}
-              className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-bengali hover:bg-blue-100 transition-colors"
+              className="px-3 py-1.5 bg-blue-50 text-blue-700 rounded-full text-xs font-bengali hover:bg-blue-100 transition-colors active:scale-95"
             >
               {option.label}
             </button>
