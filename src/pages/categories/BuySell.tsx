@@ -9,6 +9,11 @@ const BuySell = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filterType, setFilterType] = useState('all');
 
+  // Scroll to top when component mounts
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const buySellings = [
     { id: 1, name: 'নিউ মার্কেট', owner: 'আব্দুল করিম', location: 'ধুনট সদর', phone: '01711000141', type: 'পোশাক ও কাপড়', details: 'সকল ধরনের পোশাক, শাড়ি, লুঙ্গি পাওয়া যায়' },
     { id: 2, name: 'ইলেকট্রনিক্স বাজার', owner: 'মোস্তফা কামাল', location: 'ধুনট বাজার', phone: '01711000142', type: 'ইলেকট্রনিক্স পণ্য', details: 'মোবাইল, ফ্যান, টিভি, ফ্রিজ বিক্রয়' },
@@ -22,10 +27,28 @@ const BuySell = () => {
     { id: 10, name: 'গিফট শপ', owner: 'সাবিনা খাতুন', location: 'ধুনট বাজার', phone: '01711000150', type: 'উপহার সামগ্রী', details: 'জন্মদিন, বিয়ে ও অন্যান্য অনুষ্ঠানের উপহার' }
   ];
 
+  const filterOptions = [
+    { value: 'পোশাক ও কাপড়', label: 'পোশাক ও কাপড়' },
+    { value: 'ইলেকট্রনিক্স পণ্য', label: 'ইলেকট্রনিক্স' },
+    { value: 'কৃষি সামগ্রী', label: 'কৃষি সামগ্রী' },
+    { value: 'বই ও স্টেশনারি', label: 'বই ও স্টেশনারি' },
+    { value: 'আসবাবপত্র', label: 'আসবাবপত্র' },
+    { value: 'প্রসাধনী সামগ্রী', label: 'প্রসাধনী' },
+    { value: 'খেলাধুলার সামগ্রী', label: 'খেলাধুলা' },
+    { value: 'নির্মাণ সামগ্রী', label: 'নির্মাণ সামগ্রী' },
+    { value: 'অলংকার', label: 'অলংকার' },
+    { value: 'উপহার সামগ্রী', label: 'উপহার' }
+  ];
+
   const filteredBuySellings = buySellings.filter(item => {
     const matchesSearch = item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         item.type.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesSearch;
+                         item.type.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         item.owner.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         item.location.toLowerCase().includes(searchQuery.toLowerCase());
+    
+    const matchesFilter = filterType === 'all' || item.type === filterType;
+    
+    return matchesSearch && matchesFilter;
   });
 
   return (
@@ -43,39 +66,47 @@ const BuySell = () => {
         <SearchAndFilter
           onSearch={setSearchQuery}
           onFilter={setFilterType}
-          placeholder="দোকান বা পণ্য খুঁজুন..."
+          placeholder="দোকান, পণ্য বা মালিক খুঁজুন..."
+          filterOptions={filterOptions}
         />
 
         <div className="px-4 py-2">
           <div className="grid gap-3">
-            {filteredBuySellings.map((item) => (
-              <div key={item.id} className="bg-white rounded-lg shadow-sm border border-gray-100 p-4">
-                <div className="flex justify-between items-start mb-2">
-                  <h3 className="font-semibold text-gray-800 text-base">{item.name}</h3>
-                  <span className="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full">
-                    {item.type}
-                  </span>
-                </div>
-                
-                <div className="space-y-2 text-sm text-gray-600">
-                  <div className="flex items-center">
-                    <Tag size={14} className="mr-2 text-gray-400" />
-                    <span>{item.details}</span>
+            {filteredBuySellings.length > 0 ? (
+              filteredBuySellings.map((item) => (
+                <div key={item.id} className="bg-white rounded-lg shadow-sm border border-gray-100 p-4 hover:shadow-md transition-shadow">
+                  <div className="flex justify-between items-start mb-2">
+                    <h3 className="font-semibold text-gray-800 text-base">{item.name}</h3>
+                    <span className="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full">
+                      {item.type}
+                    </span>
                   </div>
-                  <div className="flex items-center">
-                    <MapPin size={14} className="mr-2 text-gray-400" />
-                    <span>{item.location}</span>
-                  </div>
-                  <div className="flex items-center justify-between">
+                  
+                  <div className="space-y-2 text-sm text-gray-600">
                     <div className="flex items-center">
-                      <Phone size={14} className="mr-2 text-gray-400" />
-                      <a href={`tel:${item.phone}`} className="text-blue-600">{item.phone}</a>
+                      <Tag size={14} className="mr-2 text-gray-400" />
+                      <span>{item.details}</span>
                     </div>
-                    <span className="text-xs text-gray-500">মালিক: {item.owner}</span>
+                    <div className="flex items-center">
+                      <MapPin size={14} className="mr-2 text-gray-400" />
+                      <span>{item.location}</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center">
+                        <Phone size={14} className="mr-2 text-gray-400" />
+                        <a href={`tel:${item.phone}`} className="text-blue-600 hover:underline">{item.phone}</a>
+                      </div>
+                      <span className="text-xs text-gray-500">মালিক: {item.owner}</span>
+                    </div>
                   </div>
                 </div>
+              ))
+            ) : (
+              <div className="text-center py-8 text-gray-500">
+                <ShoppingCart size={48} className="mx-auto mb-4 text-gray-300" />
+                <p>কোন ফলাফল পাওয়া যায়নি</p>
               </div>
-            ))}
+            )}
           </div>
         </div>
       </div>
